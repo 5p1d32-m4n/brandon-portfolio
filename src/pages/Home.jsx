@@ -1,3 +1,4 @@
+import selfie from "../assets/Brandon.jpg"
 
 const Home = () => {
   return (
@@ -10,11 +11,22 @@ const Home = () => {
 
     {/* Main content with sidebar and cards */}
     <div className="flex flex-1 overflow-hidden">
-      {/* Left Sidebar */}
 
       {/* Main Content */}
       <main className="flex-1 ml-4 p-4 overflow-y-auto">
-      <h1>something</h1>
+        {/* Intro and call to action */}
+      <div className="flex flex-row justify-between ml-10 mr-10">
+        <div className="call-to-action">
+            <h1 className="text-4xl">Hi, I'm Brandon Baker</h1>
+            <h1 className="text-4xl text-columbia-blue">Software & Web Developer</h1>
+            <h1 className="text-4xl">Based in Puerto Rico</h1>
+            {/* Statement */}
+            <p>I'm a full stack web developer and software engineer.</p>
+        </div>
+        <div className="pro-pic">
+            <img src={selfie} alt="pro-pic" className="relative z-20" width={512} height={512} />
+        </div>
+      </div>
       </main>
     </div>
   </div>
