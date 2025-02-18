@@ -7,7 +7,7 @@ import { FaUpwork } from "react-icons/fa6";
 const Navbar = () => {
     return (
         <nav className="sticky top-0 w-full p-4 flex justify-between gap-4 shadow-lg border-b">
-            <div className="navbar-brand">
+            <div className="navbar-brand mt-2">
                 <Link to="/" className="text-xl 
                                         font-bold 
                                         flex
@@ -20,12 +20,14 @@ const Navbar = () => {
                     <h1 className="uppercase font-semibold">Brandon</h1>
                 </Link>
             </div>
-            <div className="flex gap-4">
+            <div className="flex gap-4 justify-center items-center">
                 <Link to="/linkedin" className="w-10 
                                         h-10 
                                         rounded 
                                         bg-[var(--color-imperial-gold)] 
-                                        p-2 hover:bg-[var(--color-neon-green)] 
+                                        p-2
+                                        mt-2 
+                                        hover:bg-[var(--color-neon-green)] 
                                         transition-colors">
                 <BsLinkedin />
                 </Link>
@@ -33,7 +35,9 @@ const Navbar = () => {
                                         h-10 
                                         rounded 
                                         bg-[var(--color-imperial-gold)] 
-                                        p-2 hover:bg-[var(--color-neon-green)] 
+                                        mt-2 
+                                        p-2
+                                        hover:bg-[var(--color-neon-green)] 
                                         transition-colors">
                     <BsGithub />
                 </Link>
@@ -41,23 +45,20 @@ const Navbar = () => {
                                         h-10 
                                         rounded 
                                         bg-[var(--color-imperial-gold)] 
-                                        p-2 hover:bg-[var(--color-neon-green)] 
+                                        mt-2 
+                                        p-2
+                                        hover:bg-[var(--color-neon-green)] 
                                         transition-colors">
                     <FaUpwork />
                 </Link>
                 <Link to="/" className="">
-                    <HomeIcon className="w-10 
-                                        h-10 
-                                        rounded 
-                                        bg-[var(--color-imperial-gold)] 
-                                        p-2 hover:bg-[var(--color-neon-green)] 
-                                        transition-colors" />
+                <p>Home</p>
                 </Link>
                 <Link to="/about" className="">
-                    <InformationCircleIcon className="w-10 h-10 rounded p-2" />
+                <p>About</p>
                 </Link>
                 <Link to="/projects" className="">
-                    <ScaleIcon className="w-10 h-10 rounded p-2" />
+                <p>Projects</p>
                 </Link>
             </div>
         </nav>

@@ -1,4 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Nabla&family=Tourney:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
+
+.tourney-unique {
+    font-family: "Tourney", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+}
+
+.nabla-unique {
+    font-family: "Nabla", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+      "EDPT" 100,
+      "EHLT" 12;
+}
 
 /* WebKit (Chrome, Edge, Safari) */
 nav ul::-webkit-scrollbar {
@@ -30,4 +51,18 @@ nav ul {
 nav ul:hover {
     scrollbar-width: thin;
     scrollbar-color: var(--color-imperial-gold) var(--color-dark-grey);
+}
+
+
+:root{
+    background-color: #fffef4;
+}
+
+@theme{
+
+--color-hunyadi-yellow: #F8BF62ff;
+--color-bronze: #BE813Bff;
+--color-xanthous: #F6B134ff;
+--color-smoky-black: #080702ff;
+--color-columbia-blue: #ABCEE2ff;
 }

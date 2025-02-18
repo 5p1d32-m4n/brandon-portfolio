@@ -3,8 +3,9 @@ const Home = () => {
   return (
     <div className="h-full flex flex-col">
     {/* Home header */}
-    <header className="p-4 flex items-center justify-center">
-      <h1 className="text-2xl font-bold text-[var(--color-off-white)]">Mini Data List</h1>
+    <header className="p-4 flex flex-col items-center justify-center mt-12">
+      <h1 className="text-4xl font-bold text-amber-200 tourney-unique">Crafting </h1>
+      <h1 className="text-2xl font-bold text-xanthous tourney-unique">Scalable Solutions & Seamless User Experiences</h1>
     </header>
 
     {/* Main content with sidebar and cards */}
