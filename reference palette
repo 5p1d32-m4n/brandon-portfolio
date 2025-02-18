@@ -1,9 +1,11 @@
 /* CSS HEX */
+theme{
 --hunyadi-yellow: #F8BF62ff;
 --bronze: #BE813Bff;
 --xanthous: #F6B134ff;
 --smoky-black: #080702ff;
 --columbia-blue: #ABCEE2ff;
+}
 
 /* CSS HSL */
 --hunyadi-yellow: hsla(37, 91%, 68%, 1);
