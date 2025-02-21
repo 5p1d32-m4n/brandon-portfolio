@@ -13,14 +13,14 @@ function App() {
 
   return (
     <div className="h-screen overflow-hidden flex flex-col">
-    <Navbar/>
-    <main className="flex-1 overflow-hidden">
-      <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route path="/projects" element={<Projects />}/>
-        <Route path="/contact" element={<Contact />}/>
-      </Routes>
-    </main>
+      <Navbar />
+      <main className="flex-1 overflow-y-auto">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
     </div>
   )
 }

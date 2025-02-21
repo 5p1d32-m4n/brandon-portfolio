@@ -1,13 +1,12 @@
 import { Link } from "react-router";
-import ReactSVG from "../assets/react.svg"
-import { HomeIcon, InformationCircleIcon, ScaleIcon, ClockIcon } from "@heroicons/react/16/solid"
-import {BsLinkedin, BsGithub} from "react-icons/bs"
+import devLogo from "../assets/devLogo.png"
+import { BsLinkedin, BsGithub } from "react-icons/bs"
 import { FaUpwork } from "react-icons/fa6";
 
 const Navbar = () => {
     return (
         <nav className="sticky top-0 w-full p-4 flex justify-between gap-4 shadow-lg border-b">
-            <div className="navbar-brand mt-2">
+            <div className="navbar-brand">
                 <Link to="/" className="text-xl 
                                         font-bold 
                                         flex
@@ -16,8 +15,8 @@ const Navbar = () => {
                                         hover:text-[var(--color-neon-green)]
                                         transition-colors">
                     {/* MainLogo */}
-                    <img src={ReactSVG} alt="WarLogo" className="max-w-20" />
-                    <h1 className="uppercase font-semibold">Brandon</h1>
+                    <img src={devLogo} alt="WarLogo" className="max-w-15" />
+                    <h1 className="uppercase font-semibold mt-4 italic">Brandon Baker</h1>
                 </Link>
             </div>
             <div className="flex gap-4 justify-center items-center">
@@ -29,7 +28,7 @@ const Navbar = () => {
                                         mt-2 
                                         hover:bg-[var(--color-neon-green)] 
                                         transition-colors">
-                <BsLinkedin />
+                    <BsLinkedin />
                 </Link>
                 <Link to="/github" className="w-10 
                                         h-10 
@@ -52,13 +51,13 @@ const Navbar = () => {
                     <FaUpwork />
                 </Link>
                 <Link to="/" className="">
-                <p>Home</p>
+                    <p>Home</p>
                 </Link>
                 <Link to="/about" className="">
-                <p>About</p>
+                    <p>About</p>
                 </Link>
                 <Link to="/projects" className="">
-                <p>Projects</p>
+                    <p>Projects</p>
                 </Link>
             </div>
         </nav>

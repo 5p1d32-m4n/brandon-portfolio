@@ -8,7 +8,7 @@
     font-weight: 400;
     font-style: normal;
     font-variation-settings:
-      "wdth" 100;
+        "wdth" 100;
 }
 
 .nabla-unique {
@@ -17,8 +17,8 @@
     font-weight: 400;
     font-style: normal;
     font-variation-settings:
-      "EDPT" 100,
-      "EHLT" 12;
+        "EDPT" 100,
+        "EHLT" 12;
 }
 
 /* WebKit (Chrome, Edge, Safari) */
@@ -54,15 +54,15 @@ nav ul:hover {
 }
 
 
-:root{
-    background-color: #fffef4;
+:root {
+    background-color: #fefefd;
 }
 
-@theme{
+@theme {
 
---color-hunyadi-yellow: #F8BF62ff;
---color-bronze: #BE813Bff;
---color-xanthous: #F6B134ff;
---color-smoky-black: #080702ff;
---color-columbia-blue: #ABCEE2ff;
+    --color-hunyadi-yellow: #F8BF62;
+    --color-bronze: #FEFEFD;
+    --color-xanthous: #F6B134;
+    --color-smoky-black: #080702;
+    --color-columbia-blue: #ABCEE2;
 }
