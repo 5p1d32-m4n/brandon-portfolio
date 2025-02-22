@@ -1,11 +1,48 @@
 import selfie from "../assets/Brandon.jpg"
 import selfie2 from "../assets/BrandonCircled.jpg"
 import { ImEmbed2 } from "react-icons/im";
-import { IoBriefcaseOutline } from "react-icons/io5";
-import { IoShield } from "react-icons/io5";
-import { FaDocker } from "react-icons/fa";
+import { IoBriefcaseOutline, IoShield, IoLogoJavascript, IoLogoReact, IoLogoHtml5, IoLogoNodejs, IoLogoCss3 } from "react-icons/io5";
+import { FaDocker, FaFigma, FaWordpress, FaGithub, FaGoogle } from "react-icons/fa";
 import { BsWindowStack } from "react-icons/bs";
 import { MdOutlineScreenSearchDesktop } from "react-icons/md";
+import { SiExpress, SiMongodb, SiTailwindcss, SiAdobephotoshop, SiAdobeillustrator, SiCanva, SiElementor, SiWix, SiSemrush, SiZapier } from "react-icons/si";
+import { RiNextjsLine } from "react-icons/ri";
+import { DiMsqlServer } from "react-icons/di";
+
+
+// Add this near the top of your file with other imports
+const developmentSkills = [
+  { name: 'Javascript', icon: IoLogoJavascript },
+  { name: 'React', icon: IoLogoReact },
+  { name: 'HTML', icon: IoLogoHtml5 },
+  { name: 'NodeJS', icon: IoLogoNodejs },
+  { name: 'Tailwind', icon: SiTailwindcss },
+  { name: 'CSS', icon: IoLogoCss3 },
+  { name: 'Next.js', icon: RiNextjsLine },
+  { name: 'Express', icon: SiExpress },
+  { name: 'Mongodb', icon: SiMongodb },
+  { name: 'Microsoft SQL', icon: DiMsqlServer },
+  // Add more skills...
+];
+
+// Update the design skills array
+const designSkills = [
+  { name: 'Figma', icon: FaFigma },
+  { name: 'Photoshop', icon: SiAdobephotoshop },
+  { name: 'Illustrator', icon: SiAdobeillustrator },
+  { name: 'Canva', icon: SiCanva },
+  { name: 'Elementor', icon: SiElementor },
+  { name: 'Wordpress', icon: FaWordpress },
+  { name: 'Wix', icon: SiWix },
+];
+
+// Update the other skills array
+const otherSkills = [
+  { name: 'Github', icon: FaGithub },
+  { name: 'Zapier', icon: SiZapier },
+  { name: 'Analytics', icon: FaGoogle },
+  { name: 'SEMRush', icon: SiSemrush },
+];
 
 
 const Home = () => {
@@ -120,7 +157,82 @@ const Home = () => {
               </div>
             </div>
           </section>
-          {/* Intro and call to action */}
+          {/* Skills Section */}
+          {/* Skills Section */}
+          <section id="skills" className="py-24 w-full">
+            <div className="mx-auto px-4">
+              {/* Development Skills */}
+              <article className="mb-24">
+                <div className="grid lg:grid-cols-2 gap-8">
+                  <div>
+                    <h2 className="text-2xl font-bold text-columbia-blue">Development Skills</h2>
+                    <hr className="border-columbia-blue" />
+                    <p className="pt-4 pb-8 lg:py-8 text-gray-300">
+                      As a MERN stack developer specializing in frontend development with a strong understanding
+                      of backend architecture, I build dynamic, scalable web applications. My focus is on creating
+                      seamless user experiences with high performance and efficiency, leveraging modern technologies
+                      to deliver robust, full-stack solutions.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    {developmentSkills.map((skill, index) => (
+                      <div key={index} className="flex flex-col items-center p-4">
+                        <skill.icon size={48} className="mb-2" />
+                        <p className="text-center text-sm">{skill.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+
+              {/* Web Design Skills */}
+              <article className="mb-24">
+                <div className="grid lg:grid-cols-2 gap-8">
+                  <div>
+                    <h2 className="text-2xl font-bold text-columbia-blue">Web Design Skills</h2>
+                    <hr className="border-columbia-blue" />
+                    <p className="pt-4 pb-8 lg:py-8 text-gray-300">
+                      I focus on creating unique, brand-driven web designs that are not only visually compelling
+                      but also optimized for user experience and conversion rates. With a blend of creative tools
+                      and intuitive platforms, I craft designs that resonate with target audiences and support
+                      business goals.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    {designSkills.map((skill, index) => (
+                      <div key={index} className="flex flex-col items-center p-4">
+                        <skill.icon size={48} className="mb-2" />
+                        <p className="text-center text-sm">{skill.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+
+              {/* Other Skills */}
+              <article>
+                <div className="grid lg:grid-cols-2 gap-8">
+                  <div>
+                    <h2 className="text-2xl font-bold text-columbia-blue">Other Skills</h2>
+                    <hr className="border-columbia-blue" />
+                    <p className="pt-4 pb-8 lg:py-8 text-gray-300">
+                      In addition to full-stack development, I utilize a range of tools that enhance productivity,
+                      streamline workflows, and optimize digital performance. These tools support efficient project
+                      management, automation, and data-driven decision-making.
+                    </p>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                    {otherSkills.map((skill, index) => (
+                      <div key={index} className="flex flex-col items-center p-4">
+                        <skill.icon size={48} className="mb-2" />
+                        <p className="text-center text-sm">{skill.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
         </main>
       </div>
     </div>
