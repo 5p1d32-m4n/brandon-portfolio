@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+import ProjectCard from "../components/ProjectCard";
 import selfie from "../assets/Brandon.jpg"
 import selfie2 from "../assets/BrandonCircled.jpg"
 import { ImEmbed2 } from "react-icons/im";
@@ -5,43 +7,42 @@ import { IoBriefcaseOutline, IoShield, IoLogoJavascript, IoLogoReact, IoLogoHtml
 import { FaDocker, FaFigma, FaWordpress, FaGithub, FaGoogle } from "react-icons/fa";
 import { BsWindowStack } from "react-icons/bs";
 import { MdOutlineScreenSearchDesktop } from "react-icons/md";
-import { SiExpress, SiMongodb, SiTailwindcss, SiAdobephotoshop, SiAdobeillustrator, SiCanva, SiElementor, SiWix, SiSemrush, SiZapier } from "react-icons/si";
+import { SiExpress, SiMongodb, SiTailwindcss, SiAdobephotoshop, SiAdobeillustrator, SiCanva, SiElementor, SiWix, SiSemrush, SiZapier, SiDocker, SiPostman } from "react-icons/si";
 import { RiNextjsLine } from "react-icons/ri";
 import { DiMsqlServer } from "react-icons/di";
+import { VscAzure, VscAzureDevops } from "react-icons/vsc";
 
 
 // Add this near the top of your file with other imports
 const developmentSkills = [
-  { name: 'Javascript', icon: IoLogoJavascript },
-  { name: 'React', icon: IoLogoReact },
-  { name: 'HTML', icon: IoLogoHtml5 },
-  { name: 'NodeJS', icon: IoLogoNodejs },
-  { name: 'Tailwind', icon: SiTailwindcss },
-  { name: 'CSS', icon: IoLogoCss3 },
-  { name: 'Next.js', icon: RiNextjsLine },
-  { name: 'Express', icon: SiExpress },
-  { name: 'Mongodb', icon: SiMongodb },
-  { name: 'Microsoft SQL', icon: DiMsqlServer },
+  { name: 'Javascript', icon: IoLogoJavascript, color: '#F7DF1E' },
+  { name: 'React', icon: IoLogoReact, color: '#61DAFB' },
+  { name: 'HTML', icon: IoLogoHtml5, color: '#E34F26' },
+  { name: 'NodeJS', icon: IoLogoNodejs, color: '#68A063' },
+  { name: 'Tailwind', icon: SiTailwindcss, color: '#38B2AC' },
+  { name: 'CSS', icon: IoLogoCss3, color: '#264DE4' },
+  { name: 'Next.js', icon: RiNextjsLine, color: '#000000' },
+  { name: 'Express', icon: SiExpress, color: '#000000' },
+  { name: 'Mongodb', icon: SiMongodb, color: '#4DB33D' },
+  { name: 'Microsoft SQL', icon: DiMsqlServer, color: '#CC2927' },
   // Add more skills...
 ];
 
 // Update the design skills array
 const designSkills = [
-  { name: 'Figma', icon: FaFigma },
-  { name: 'Photoshop', icon: SiAdobephotoshop },
-  { name: 'Illustrator', icon: SiAdobeillustrator },
-  { name: 'Canva', icon: SiCanva },
-  { name: 'Elementor', icon: SiElementor },
-  { name: 'Wordpress', icon: FaWordpress },
-  { name: 'Wix', icon: SiWix },
+  { name: 'Figma', icon: FaFigma, color: '#0ACF83' },
+  { name: 'Photoshop', icon: SiAdobephotoshop, color: '#31A8FF' },
+  { name: 'Canva', icon: SiCanva, color: '#00C4CC' },
+  { name: 'Wordpress', icon: FaWordpress, color: '#21759B' },
 ];
 
 // Update the other skills array
 const otherSkills = [
-  { name: 'Github', icon: FaGithub },
-  { name: 'Zapier', icon: SiZapier },
-  { name: 'Analytics', icon: FaGoogle },
-  { name: 'SEMRush', icon: SiSemrush },
+  { name: 'Github', icon: FaGithub, color: '#181717' },
+  { name: 'Zapier', icon: SiZapier, color: '#FF4A00' },
+  { name: 'Docker', icon: SiDocker, color: '#31A8FF' },
+  { name: 'Postman', icon: SiPostman, color: '#FF4A00' },
+  { name: 'Azure', icon: VscAzure, color: '#31A8FF' },
 ];
 
 
@@ -158,7 +159,6 @@ const Home = () => {
             </div>
           </section>
           {/* Skills Section */}
-          {/* Skills Section */}
           <section id="skills" className="py-24 w-full">
             <div className="mx-auto px-4">
               {/* Development Skills */}
@@ -167,7 +167,7 @@ const Home = () => {
                   <div>
                     <h2 className="text-2xl font-bold text-columbia-blue">Development Skills</h2>
                     <hr className="border-columbia-blue" />
-                    <p className="pt-4 pb-8 lg:py-8 text-gray-300">
+                    <p className="pt-4 pb-8 lg:py-8">
                       As a MERN stack developer specializing in frontend development with a strong understanding
                       of backend architecture, I build dynamic, scalable web applications. My focus is on creating
                       seamless user experiences with high performance and efficiency, leveraging modern technologies
@@ -177,7 +177,7 @@ const Home = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     {developmentSkills.map((skill, index) => (
                       <div key={index} className="flex flex-col items-center p-4">
-                        <skill.icon size={48} className="mb-2" />
+                        <skill.icon size={48} style={{color: skill.color}} className="mb-2" />
                         <p className="text-center text-sm">{skill.name}</p>
                       </div>
                     ))}
@@ -191,7 +191,7 @@ const Home = () => {
                   <div>
                     <h2 className="text-2xl font-bold text-columbia-blue">Web Design Skills</h2>
                     <hr className="border-columbia-blue" />
-                    <p className="pt-4 pb-8 lg:py-8 text-gray-300">
+                    <p className="pt-4 pb-8 lg:py-8">
                       I focus on creating unique, brand-driven web designs that are not only visually compelling
                       but also optimized for user experience and conversion rates. With a blend of creative tools
                       and intuitive platforms, I craft designs that resonate with target audiences and support
@@ -201,7 +201,7 @@ const Home = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     {designSkills.map((skill, index) => (
                       <div key={index} className="flex flex-col items-center p-4">
-                        <skill.icon size={48} className="mb-2" />
+                        <skill.icon size={48} style={{color: skill.color}} className="mb-2" />
                         <p className="text-center text-sm">{skill.name}</p>
                       </div>
                     ))}
@@ -215,7 +215,7 @@ const Home = () => {
                   <div>
                     <h2 className="text-2xl font-bold text-columbia-blue">Other Skills</h2>
                     <hr className="border-columbia-blue" />
-                    <p className="pt-4 pb-8 lg:py-8 text-gray-300">
+                    <p className="pt-4 pb-8 lg:py-8">
                       In addition to full-stack development, I utilize a range of tools that enhance productivity,
                       streamline workflows, and optimize digital performance. These tools support efficient project
                       management, automation, and data-driven decision-making.
@@ -224,7 +224,7 @@ const Home = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     {otherSkills.map((skill, index) => (
                       <div key={index} className="flex flex-col items-center p-4">
-                        <skill.icon size={48} className="mb-2" />
+                        <skill.icon size={48} style={{color: skill.color}} className="mb-2" />
                         <p className="text-center text-sm">{skill.name}</p>
                       </div>
                     ))}
@@ -233,6 +233,56 @@ const Home = () => {
               </article>
             </div>
           </section>
+          {/* Project Section */}
+          <section id="projects" className="py-24 w-full">
+            <div className="mb-12">
+              <span className="text-primary text-lg font-semibold uppercase text-center block">My Work</span>
+              <h2 className="text-center text-balance max-md:w-full w-3/4 mx-auto">
+                Functionality focused, design driven, and user centric
+              </h2>
+            </div>
+            <div className="grid gap-4">
+              <ProjectCard
+                title="S.F. Ventures"
+                description="S.F. Ventures provides innovative business solutions that change the way you see and do your business."
+                techStack="ASP.NET Core MVC, JavaScript, MS SQL Server, Docker"
+                repoLink="https://github.com/yourgithub/proposal-management"
+                liveDemo="https://your-live-demo.com"
+              />
+              <ProjectCard
+                title="AniToons"
+                description="AniToons is the ultimate destination for all your favorite anime shows and movies."
+                techStack="Python, Django, React"
+                repoLink="https://github.com/yourgithub/anitoons"
+                liveDemo="https://your-live-demo.com"
+              />
+              <ProjectCard
+                title="Azure"
+                description="Azure is the first dragon to be minted on the $Base platform."
+                techStack="Blockchain, React"
+                repoLink="https://github.com/yourgithub/azure"
+                liveDemo="https://your-live-demo.com"
+              />
+              <ProjectCard
+                title="NXN"
+                description="NXN is a decentralized currency that is safe, secure, and easy to use."
+                techStack="Solidity, React, Web3"
+                repoLink="https://github.com/yourgithub/nxn"
+                liveDemo="https://your-live-demo.com"
+              />
+            </div>
+            <div className="grid place-items-center">
+              <Link
+                to="/projects"
+                className="font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap rounded text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary hover:brightness-75 h-10 px-4 py-2 mt-8"
+                aria-label="View all Projects"
+              >
+                View all Projects
+              </Link>
+            </div>
+          </section>
+          {/* Contact Form */}
+          <section id="contact"></section>
         </main>
       </div>
     </div>
