@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+import ProjectHero from "../components/ProjectHero.jsx";
 import ProjectCard from "../components/ProjectCard";
 import selfie from "../assets/Brandon.jpg"
 import selfie2 from "../assets/BrandonCircled.jpg"
@@ -11,6 +12,8 @@ import { SiExpress, SiMongodb, SiTailwindcss, SiAdobephotoshop, SiAdobeillustrat
 import { RiNextjsLine } from "react-icons/ri";
 import { DiMsqlServer } from "react-icons/di";
 import { VscAzure, VscAzureDevops } from "react-icons/vsc";
+import erpHome from "../assets/portfolioImages/erp/erpHome.png"
+import erpLogo from "../assets/portfolioImages/erp/stgLogo.png"
 
 
 // Add this near the top of your file with other imports
@@ -177,7 +180,7 @@ const Home = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     {developmentSkills.map((skill, index) => (
                       <div key={index} className="flex flex-col items-center p-4">
-                        <skill.icon size={48} style={{color: skill.color}} className="mb-2" />
+                        <skill.icon size={48} style={{ color: skill.color }} className="mb-2" />
                         <p className="text-center text-sm">{skill.name}</p>
                       </div>
                     ))}
@@ -201,7 +204,7 @@ const Home = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     {designSkills.map((skill, index) => (
                       <div key={index} className="flex flex-col items-center p-4">
-                        <skill.icon size={48} style={{color: skill.color}} className="mb-2" />
+                        <skill.icon size={48} style={{ color: skill.color }} className="mb-2" />
                         <p className="text-center text-sm">{skill.name}</p>
                       </div>
                     ))}
@@ -224,7 +227,7 @@ const Home = () => {
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     {otherSkills.map((skill, index) => (
                       <div key={index} className="flex flex-col items-center p-4">
-                        <skill.icon size={48} style={{color: skill.color}} className="mb-2" />
+                        <skill.icon size={48} style={{ color: skill.color }} className="mb-2" />
                         <p className="text-center text-sm">{skill.name}</p>
                       </div>
                     ))}
@@ -234,7 +237,7 @@ const Home = () => {
             </div>
           </section>
           {/* Project Section */}
-          <section id="projects" className="py-24 w-full">
+          <section id="projects" className="w-full">
             <div className="mb-12">
               <span className="text-primary text-lg font-semibold uppercase text-center block">My Work</span>
               <h2 className="text-center text-balance max-md:w-full w-3/4 mx-auto">
@@ -242,33 +245,21 @@ const Home = () => {
               </h2>
             </div>
             <div className="grid gap-4">
-              <ProjectCard
-                title="S.F. Ventures"
+              <ProjectHero
+                title="WarMiniPricer"
                 description="S.F. Ventures provides innovative business solutions that change the way you see and do your business."
-                techStack="ASP.NET Core MVC, JavaScript, MS SQL Server, Docker"
                 repoLink="https://github.com/yourgithub/proposal-management"
                 liveDemo="https://your-live-demo.com"
+                linkColor="#F7BF00" // Replace with the desired link color.
               />
-              <ProjectCard
-                title="AniToons"
-                description="AniToons is the ultimate destination for all your favorite anime shows and movies."
-                techStack="Python, Django, React"
-                repoLink="https://github.com/yourgithub/anitoons"
-                liveDemo="https://your-live-demo.com"
-              />
-              <ProjectCard
-                title="Azure"
-                description="Azure is the first dragon to be minted on the $Base platform."
-                techStack="Blockchain, React"
-                repoLink="https://github.com/yourgithub/azure"
-                liveDemo="https://your-live-demo.com"
-              />
-              <ProjectCard
-                title="NXN"
-                description="NXN is a decentralized currency that is safe, secure, and easy to use."
-                techStack="Solidity, React, Web3"
-                repoLink="https://github.com/yourgithub/nxn"
-                liveDemo="https://your-live-demo.com"
+              <ProjectHero
+                title="STG-ERP"
+                description="An ERP system, which stands for 'Enterprise Resource Planning', is a software system that integrates and automates a company's core business processes, including finance, human resources, manufacturing, supply chain, sales, and procurement, providing a unified view of all operations and a single source of truth for data across different departments within ShareTechGroup Engineering."
+                heroImage={erpHome}
+                // If you have a separate logo image, pass it here:
+                logoSrc={erpLogo} // Replace 'erpLogo' with the appropriate asset.
+                viewCaseHref="https://your-live-demo.com"
+                linkColor="#F7BF00" // Replace with the desired link color.
               />
             </div>
             <div className="grid place-items-center">

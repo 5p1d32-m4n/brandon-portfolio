@@ -5,7 +5,7 @@ import { FaUpwork } from "react-icons/fa6";
 
 const Navbar = () => {
     return (
-        <nav className="sticky top-0 w-full p-4 flex justify-between gap-4 shadow-lg border-b">
+        <nav className="sticky top-0 w-full p-2 flex justify-between gap-4 shadow-lg border-b">
             <div className="navbar-brand">
                 <Link to="/" className="text-xl 
                                         font-bold 
