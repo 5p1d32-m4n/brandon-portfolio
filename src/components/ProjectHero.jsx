@@ -9,9 +9,9 @@ const ProjectHero = ({
   linkColor
 }) => {
   return (
-    <div className="flex flex-col border rounded-xl border-columbia-blue items-center justify-center w-full text-center lg:text-left lg:flex-row lg:gap-8">
-      {/* Left Column: 30% width on large screens */}
-      <div className="w-full lg:w-[30%] grid place-content-center gap-4 text-center lg:text-left pl-6">
+    <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] border rounded-xl border-columbia-blue w-full text-center lg:text-left">
+      {/* Left Column */}
+      <div className="grid place-content-center gap-4 text-center lg:text-left pl-6">
         <div className="relative m-0 p-0 overflow-hidden">
           <img
             alt={title}
@@ -50,12 +50,12 @@ const ProjectHero = ({
           </a>
         </div>
       </div>
-      {/* Right Column: 70% width on large screens */}
-      <div className="w-full h-full lg:w-[70%] px-8 lg:-right-32 lg:-top-14 lg:h-[500px] overflow-clip">
+      {/* Right Column */}
+      <div className="px-8 lg:-right-32 lg:-top-14 lg:h-[500px] overflow-hidden">
         <img
           alt={title}
           src={heroImage}
-          className="object-center object-contain w-full h-full"
+          className="object-contain object-center w-full h-full"
         />
       </div>
     </div>

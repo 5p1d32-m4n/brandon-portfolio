@@ -237,7 +237,7 @@ const Home = () => {
             </div>
           </section>
           {/* Project Section */}
-          <section id="projects" className="w-full">
+          <section id="projects" className="px-18 w-full">
             <div className="mb-12">
               <span className="text-primary text-lg font-semibold uppercase text-center block">My Work</span>
               <h2 className="text-center text-balance max-md:w-full w-3/4 mx-auto">
