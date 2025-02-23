@@ -247,7 +247,7 @@ const Home = () => {
             <div className="grid gap-4">
               <ProjectHero
                 title="WarMiniPricer"
-                description="S.F. Ventures provides innovative business solutions that change the way you see and do your business."
+                description="Wargamer's Alley"
                 repoLink="https://github.com/yourgithub/proposal-management"
                 liveDemo="https://your-live-demo.com"
                 linkColor="#F7BF00" // Replace with the desired link color.
