@@ -14,6 +14,8 @@ import { DiMsqlServer } from "react-icons/di";
 import { VscAzure, VscAzureDevops } from "react-icons/vsc";
 import erpHome from "../assets/portfolioImages/erp/erpHome.png"
 import erpLogo from "../assets/portfolioImages/erp/stgLogo.png"
+import warMiniHome from "../assets/portfolioImages/warmini/minis-list.png";
+import warMiniLogo from "../assets/portfolioImages/warmini/WSLogo.jpeg";
 
 
 // Add this near the top of your file with other imports
@@ -247,7 +249,10 @@ const Home = () => {
             <div className="grid gap-4">
               <ProjectHero
                 title="WarMiniPricer"
-                description="Wargamer's Alley"
+                description="Engineered a web application featuring automated web scraping to gather and track pricing data for miniature figurines across multiple e-commerce sites. This tool, built for local retailer Wargamer's Alley, provides insights into market trends and includes modules for pre-order and delivery management, enhancing their inventory control and pricing decisions."
+                heroImage={warMiniHome}
+                // If you have a separate logo image, pass it here:
+                logoSrc={warMiniLogo} // Replace 'warMiniLogo' with the appropriate asset.
                 repoLink="https://github.com/yourgithub/proposal-management"
                 liveDemo="https://your-live-demo.com"
                 linkColor="#F7BF00" // Replace with the desired link color.

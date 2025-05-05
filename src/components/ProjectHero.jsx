@@ -12,12 +12,12 @@ const ProjectHero = ({
     <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] border rounded-xl border-columbia-blue w-full text-center lg:text-left">
       {/* Left Column */}
       <div className="grid place-content-center gap-4 text-center lg:text-left pl-6">
-        <div className="relative m-0 p-0 overflow-hidden">
+        <div className="relative mx-auto lg:mx-0 w-24 h-24 flex items-center justify-center overflow-hidden">
           <img
             alt={title}
             src={logoSrc}
             loading="lazy"
-            className="object-contain w-24 h-24"
+            className="object-contain max-w-full max-h-full"
           />
         </div>
         <div className="px-8 lg:px-0 space-y-4">
