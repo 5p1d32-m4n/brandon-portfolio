@@ -1,44 +1,68 @@
-import { sql } from '@vercel/postgres';
-import { createClient } from '@vercel/postgres';
+import { sql as vercelSql } from '@vercel/postgres'; // For Vercel-deployed environments
+import { Pool as PgPool } from 'pg'; // For local development
+
+// Determine if running in local development with `vercel dev`
+const isVercelDev = process.env.VERCEL_ENV === 'development';
+// Check if the URL is for localhost or 127.0.0.1
+const isConnectingToLocalhost = process.env.POSTGRES_URL &&
+                               (process.env.POSTGRES_URL.includes('localhost') ||
+                                process.env.POSTGRES_URL.includes('127.0.0.1'));
+
+let localPgPool; // Define pool variable for the 'pg' library
+
+// Only create the local 'pg' pool if we're in local dev AND connecting to localhost
+if (isVercelDev && isConnectingToLocalhost) {
+    console.log('INFO: Using standard `pg` Pool for local development against localhost.');
+    localPgPool = new PgPool({
+        connectionString: process.env.POSTGRES_URL,
+        // The `pg` library typically doesn't need explicit sslmode=disable for localhost
+        // as it attempts non-SSL first. Your string already has it, which is fine.
+    });
+
+    // Optional: Test the local pool immediately (for quick feedback during startup)
+    localPgPool.query('SELECT NOW()')
+        .then(res => console.log('Local `pg` pool connected successfully. DB time:', res.rows[0].now))
+        .catch(err => console.error('!!! ERROR: Local `pg` pool failed to connect:', err));
+} else {
+    console.log('INFO: Configured to use Vercel Postgres SDK (`sql` tag) for deployed environment.');
+}
 
 export default async function handler(req, res) {
-
-    // Log environment variables directly at the start of the function
-    console.log('--- ENVIRONMENT VARIABLES ---');
-    console.log('MY_SUPER_TEST_VARIABLE:', process.env.MY_SUPER_TEST_VARIABLE);
+    console.log('--- PROJECTS API ---');
+    // Ensure you use the correct test variable name from your .env file here
+    console.log('SUPER_TEST_VARIABLE:', process.env.SUPER_TEST_VARIABLE);
     console.log('POSTGRES_URL from env:', process.env.POSTGRES_URL);
-    console.log('-----------------------------');
+    console.log(`INFO: isVercelDev=${isVercelDev}, isConnectingToLocalhost=${isConnectingToLocalhost}`);
+    console.log('--------------------');
 
-    // Create a new client for each request when using createClient directly.
-    // This is suitable for serverless functions.
-    const client = createClient({
-        connectionString: process.env.POSTGRES_URL // Pass the direct connection string here
-    });
-    console.log('Client created:', client);
-
-    // Check request method (GET, POST, PUT, DELETE)
     if (req.method === 'GET') {
         try {
-            console.log('Connecting to the database...');
-            await client.connect(); // Connect to the database
-            console.log('Client connected to the database');
-            const { rows: projects } = await client.query(`SELECT * FROM projects ORDER BY id ASC;`);
-            await client.end(); // Close the connection after the query
-
-            res.status(200).json(projects); // Send the projects as a JSON response
+            let projects;
+            if (localPgPool) { // If we initialized the 'pg' pool for local dev
+                console.log('Querying with local `pg` pool...');
+                const result = await localPgPool.query('SELECT * FROM projects ORDER BY id ASC;');
+                projects = result.rows;
+            } else { // Otherwise, use Vercel's `sql` tag for deployed environments
+                console.log('Querying with Vercel `sql` tag...');
+                const queryResult = await vercelSql`SELECT * FROM projects ORDER BY id ASC;`;
+                projects = queryResult.rows;
+            }
+            console.log('Successfully queried projects. Number of projects:', projects.length);
+            res.status(200).json(projects);
+            console.log('Response sent successfully.');
         } catch (e) {
-            if (client) await client.end().catch(e => console.error("Error ending client", e));
-            console.error('Database Error with createClient():', error);
-            response.status(500).json({
-                message: 'Error fetching projects with createClient',
-                error: error.message,
-                code: error.code,
-                details: error.toString()
+            console.error('!!! DATABASE OPERATION ERROR !!!:', e);
+            res.status(500).json({
+                message: 'Error fetching projects',
+                error: e.message,
+                code: e.code,
+                stack: e.stack
             });
         }
+        // No explicit client.end() is needed here if using localPgPool (the pool manages connections)
+        // or vercelSql (it manages its own connections, typically per query for serverless).
     } else {
         res.setHeader('Allow', ['GET']);
         res.status(405).json({ message: `Method ${req.method} Not Allowed` });
-
     }
 }
