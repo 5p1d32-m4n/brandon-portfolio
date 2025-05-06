@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import ProjectHero from "../components/ProjectHero.jsx";
 import ProjectCard from "../components/ProjectCard";
-import selfie from "../assets/Brandon.jpg"
-import selfie2 from "../assets/BrandonCircled.jpg"
+import selfie from "../../public/assets/Brandon.jpg"
+import selfie2 from "../../public/assets/BrandonCircled.jpg"
 import { ImEmbed2 } from "react-icons/im";
 import { IoBriefcaseOutline, IoShield, IoLogoJavascript, IoLogoReact, IoLogoHtml5, IoLogoNodejs, IoLogoCss3 } from "react-icons/io5";
 import { FaDocker, FaFigma, FaWordpress, FaGithub, FaGoogle } from "react-icons/fa";
@@ -12,10 +12,10 @@ import { SiExpress, SiMongodb, SiTailwindcss, SiAdobephotoshop, SiAdobeillustrat
 import { RiNextjsLine } from "react-icons/ri";
 import { DiMsqlServer } from "react-icons/di";
 import { VscAzure, VscAzureDevops } from "react-icons/vsc";
-import erpHome from "../assets/portfolioImages/erp/erpHome.png"
-import erpLogo from "../assets/portfolioImages/erp/stgLogo.png"
-import warMiniHome from "../assets/portfolioImages/warmini/minis-list.png";
-import warMiniLogo from "../assets/portfolioImages/warmini/WSLogo.jpeg";
+import erpHome from "../../public/assets/portfolioImages/erp/erpHome.png"
+import erpLogo from "../../public/assets/portfolioImages/erp/stgLogo.png"
+import warMiniHome from "../../public/assets/portfolioImages/warmini/minis-list.png";
+import warMiniLogo from "../../public/assets/portfolioImages/warmini/WSLogo.jpeg";
 
 
 // Add this near the top of your file with other imports
