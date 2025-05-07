@@ -20,7 +20,7 @@ const Navbar = () => {
                 </Link>
             </div>
             <div className="flex gap-4 justify-center items-center">
-                <Link to="/linkedin" className="w-10 
+                <Link to="https://www.linkedin.com/in/brandon-baker-b295a11aa/" className="w-10 
                                         h-10 
                                         rounded 
                                         bg-[var(--color-imperial-gold)] 
@@ -30,7 +30,7 @@ const Navbar = () => {
                                         transition-colors">
                     <BsLinkedin />
                 </Link>
-                <Link to="/github" className="w-10 
+                <Link to="https://github.com/5p1d32-m4n" className="w-10 
                                         h-10 
                                         rounded 
                                         bg-[var(--color-imperial-gold)] 
@@ -40,7 +40,7 @@ const Navbar = () => {
                                         transition-colors">
                     <BsGithub />
                 </Link>
-                <Link to="/upwork" className="w-10 
+                <Link to="https://www.upwork.com/freelancers/~0188ec4bb81a7c2578" className="w-10 
                                         h-10 
                                         rounded 
                                         bg-[var(--color-imperial-gold)] 
