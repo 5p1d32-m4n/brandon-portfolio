@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import devLogo from "../../public/assets/devLogo.png";
+import devLogo from "../assets/devLogo.png";
 import { BsLinkedin, BsGithub } from "react-icons/bs"
 import { FaUpwork } from "react-icons/fa6";
 
