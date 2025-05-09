@@ -1,4 +1,8 @@
 import { Link } from "react-router";
+import { Cloudinary } from "@cloudinary/url-gen/index";
+import { auto } from '@cloudinary/url-gen/actions/resize';
+import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
+import { AdvancedImage } from '@cloudinary/react';
 import ProjectHero from "../components/ProjectHero.jsx";
 import ProjectCard from "../components/ProjectCard";
 import selfie from "../assets/Brandon.jpg"
@@ -49,6 +53,21 @@ const otherSkills = [
   { name: 'Postman', icon: SiPostman, color: '#FF4A00' },
   { name: 'Azure', icon: VscAzure, color: '#31A8FF' },
 ];
+
+// Cloudinary configuration
+const cld = new Cloudinary({
+  cloud:{
+    cloudName: "dvo1c1tln"
+  }
+});
+
+// Use this sample image or upload your own via the Media Explorer
+const img = cld
+.image('cld-sample-5')
+.format('auto') // Optimize delivery by resizing and applying auto-format and auto-quality
+.quality('auto')
+.resize(auto().gravity(autoGravity()).width(500).height(500)); // Transform the image: auto-crop to square aspect_ratio
+
 
 
 const Home = () => {
@@ -279,6 +298,10 @@ const Home = () => {
           </section>
           {/* Contact Form */}
           <section id="contact"></section>
+          {/* Tesgin */}
+          <section id="testing">
+          <AdvancedImage cldImg={img}/>
+          </section>
         </main>
       </div>
     </div>
