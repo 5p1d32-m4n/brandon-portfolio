@@ -299,9 +299,8 @@ const Home = () => {
           {/* Contact Form */}
           <section id="contact"></section>
           {/* Tesgin */}
-          <section id="testing">
-          <AdvancedImage cldImg={img}/>
-          </section>
+          {/* <section id="testing">
+          </section> */}
         </main>
       </div>
     </div>
