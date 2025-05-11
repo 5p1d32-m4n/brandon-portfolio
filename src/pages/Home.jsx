@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { Cloudinary } from "@cloudinary/url-gen/index";
 import { auto } from '@cloudinary/url-gen/actions/resize';
@@ -56,21 +57,45 @@ const otherSkills = [
 
 // Cloudinary configuration
 const cld = new Cloudinary({
-  cloud:{
+  cloud: {
     cloudName: "dvo1c1tln"
   }
 });
 
 // Use this sample image or upload your own via the Media Explorer
 const img = cld
-.image('cld-sample-5')
-.format('auto') // Optimize delivery by resizing and applying auto-format and auto-quality
-.quality('auto')
-.resize(auto().gravity(autoGravity()).width(500).height(500)); // Transform the image: auto-crop to square aspect_ratio
+  .image('cld-sample-5')
+  .format('auto') // Optimize delivery by resizing and applying auto-format and auto-quality
+  .quality('auto')
+  .resize(auto().gravity(autoGravity()).width(500).height(500)); // Transform the image: auto-crop to square aspect_ratio
 
 
 
 const Home = () => {
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch('/api/projects');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setProjects(data);
+      } catch (error) {
+        console.error("Failed to fetch projects: ", error);
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
+
   return (
     <div className="h-full flex flex-col">
       <div className="flex flex-1 overflow-y-auto">
@@ -266,7 +291,19 @@ const Home = () => {
               </h2>
             </div>
             <div className="grid gap-4">
-              <ProjectHero
+              {isLoading && <p>Loading Projects...</p>}
+              {error && <p>Error: {error}</p>}
+              {!isLoading && !error && projects.map(project => (
+                <ProjectHero
+                  key={project.id} // Might make this into the 'slug' field.
+                  title={project.title}
+                  description={project.description}
+                  heroImage={project.hero_image_url} // Making this into Cloudinary url
+                  logoSrc={project.logo_image_url} // Making this into Cloudinary url
+                  repoLink={project.repo_link}
+                />
+              ))}
+              {/* <ProjectHero
                 title="WarMiniPricer"
                 description="Engineered a web application featuring automated web scraping to gather and track pricing data for miniature figurines across multiple e-commerce sites. This tool, built for local retailer Wargamer's Alley, provides insights into market trends and includes modules for pre-order and delivery management, enhancing their inventory control and pricing decisions."
                 heroImage={warMiniHome}
@@ -284,7 +321,7 @@ const Home = () => {
                 logoSrc={erpLogo} // Replace 'erpLogo' with the appropriate asset.
                 viewCaseHref="https://your-live-demo.com"
                 linkColor="#F7BF00" // Replace with the desired link color.
-              />
+              /> */}
             </div>
             <div className="grid place-items-center">
               <Link

@@ -1,4 +1,16 @@
 import React from "react";
+import { Cloudinary } from "@cloudinary/url-gen/index";
+import { AdvancedImage } from "@cloudinary/react";
+import { fill } from "@cloudinary/url-gen/actions/resize";
+import { AutoGravity } from "@cloudinary/url-gen/qualifiers/gravity/autoGravity/AutoGravity";
+
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: process.env.CLOUDINARY_NAME,
+    apiKey: process.env.CLOUDINARY_API
+  }
+})
+
 
 const ProjectHero = ({
   title,
@@ -8,6 +20,7 @@ const ProjectHero = ({
   viewCaseHref,
   linkColor
 }) => {
+  const heroCldImage = cld.image(ProjectHero.hero_image_url)
   return (
     <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] border rounded-xl border-columbia-blue w-full text-center lg:text-left">
       {/* Left Column */}

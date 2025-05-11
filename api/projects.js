@@ -5,8 +5,8 @@ import { Pool as PgPool } from 'pg'; // For local development
 const isVercelDev = process.env.VERCEL_ENV === 'development';
 // Check if the URL is for localhost or 127.0.0.1
 const isConnectingToLocalhost = process.env.POSTGRES_URL &&
-                               (process.env.POSTGRES_URL.includes('localhost') ||
-                                process.env.POSTGRES_URL.includes('127.0.0.1'));
+    (process.env.POSTGRES_URL.includes('localhost') ||
+        process.env.POSTGRES_URL.includes('127.0.0.1'));
 
 let localPgPool; // Define pool variable for the 'pg' library
 
