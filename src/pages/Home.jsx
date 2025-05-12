@@ -80,7 +80,7 @@ const Home = () => {
     const fetchProjects = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('/api/projects');
+        const response = await fetch('/api/projects/projects.js');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
