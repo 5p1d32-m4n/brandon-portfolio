@@ -1,10 +1,11 @@
 import React from "react";
+import { Link as RouterLink } from 'react-router-dom';
 import { Cloudinary } from "@cloudinary/url-gen/index";
 import { format, quality } from "@cloudinary/url-gen/actions/delivery";
 import { AdvancedImage } from "@cloudinary/react";
 import { fill } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from "@cloudinary/url-gen/qualifiers/gravity";
-import {scale, limitFit} from "@cloudinary/url-gen/actions/resize";
+import { scale, limitFit } from "@cloudinary/url-gen/actions/resize";
 
 const cld = new Cloudinary({
   cloud: {
@@ -20,30 +21,31 @@ const ProjectHero = ({
   logoSrc,
   heroImage,
   viewCaseHref,
+  slug,
   linkColor,
   // If you later add an array of additional images for a gallery:
   // additionalImages = [] // e.g., [{ public_id: '...', caption: '...' }, ...]
 }) => {
   const heroCldImage = heroImage
-  ? cld.image(heroImage)
+    ? cld.image(heroImage)
       // Option 1: Scale to a sensible max width, let CSS handle aspect ratio.
       .resize(scale().width(1200)) // Or limitFit().width(1200).height(1200) to not upscale
       .delivery(format('auto'))
       .delivery(quality('auto'))
-  : null;
+    : null;
 
-const logoCldImage = logoSrc
-  ? cld.image(logoSrc)
+  const logoCldImage = logoSrc
+    ? cld.image(logoSrc)
       .resize(scale().width(200)) // Scale logo to a reasonable max, CSS will handle display in its small box
       .delivery(format('auto'))
       .delivery(quality('auto'))
-  : null;
-  return(
+    : null;
+  return (
     <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] border rounded-xl border-columbia-blue w-full text-center lg:text-left">
       {/* Left Column */}
       <div className="grid place-content-center gap-4 text-center lg:text-left pl-6">
         <div className="relative mx-auto lg:mx-0 w-24 h-24 flex items-center justify-center overflow-hidden">
-        {logoCldImage ? (
+          {logoCldImage ? (
             <AdvancedImage
               cldImg={logoCldImage}
               alt={`${title} logo`}
@@ -53,7 +55,7 @@ const logoCldImage = logoSrc
           ) : (
             <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">Logo</div>
           )}
-          
+
         </div>
         <div className="px-8 lg:px-0 space-y-4"> {/* Adjust padding */}
           <h3 className="text-2xl lg:text-4xl">
@@ -61,26 +63,26 @@ const logoCldImage = logoSrc
             <hr className="mt-4" />
           </h3>
           <p className="text-balance py-4">{description}</p>
-          {viewCaseHref && (
-            <a
+          {slug ? ( // Check if slug is provided
+            <RouterLink
+              to={`/project/${slug}`} // Use the project's slug
               className="hover:brightness-75 text-lg inline-flex items-center"
-              href={viewCaseHref}
-              target="_blank"
-              rel="noopener noreferrer"
               style={{ color: linkColor }}
             >
               View Case
-              <svg /* ... SVG code ... */ className="lucide lucide-arrow-up-right ml-1">
-                <path d="M7 7h10v10"></path>
-                <path d="M7 17 17 7"></path>
-              </svg>
+              <svg /* ... */ > {/* ... */} </svg>
+            </RouterLink>
+          ) : viewCaseHref ? ( // Fallback to external link if no slug but viewCaseHref exists
+            <a /* ... existing external link setup ... */ href={viewCaseHref}>
+              View Case
+              <svg /* ... */ > {/* ... */} </svg>
             </a>
-          )}
+          ) : null}
         </div>
       </div>
       {/* Right Column */}
       <div className="px-8 lg:-right-32 lg:-top-14 lg:h-[500px] overflow-hidden">
-      {heroCldImage ? (
+        {heroCldImage ? (
           <AdvancedImage
             cldImg={heroCldImage}
             alt={title || 'Project hero image'}
@@ -89,8 +91,8 @@ const logoCldImage = logoSrc
             // The interaction of w-full, h-full and object-contain in a flex container
             // with a fixed height (lg:h-[500px]) needs careful checking.
             className="object-contain object-center w-full h-full rounded-md"
-            // Alternative if you want it to cover the area (might crop):
-            // className="object-cover object-center w-full h-full rounded-md"
+          // Alternative if you want it to cover the area (might crop):
+          // className="object-cover object-center w-full h-full rounded-md"
           />
         ) : (
           <div className="w-full lg:h-[450px] h-[250px] bg-gray-200 flex items-center justify-center text-gray-500 rounded-md">Hero Image</div>

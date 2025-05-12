@@ -301,6 +301,8 @@ const Home = () => {
                   heroImage={project.hero_image_url} // Making this into Cloudinary url
                   logoSrc={project.logo_image_url} // Making this into Cloudinary url
                   repoLink={project.repo_link}
+                  viewCaseHref={project.view_case_href}
+                  slug={project.slug}
                 />
               ))}
               {/* <ProjectHero
