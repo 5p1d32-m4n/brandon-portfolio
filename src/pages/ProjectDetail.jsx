@@ -14,10 +14,11 @@ const cld = new Cloudinary({
     }
 });
 
-const ProjectDetail= () => {
+const ProjectDetail = () => {
     const { slug } = useParams(); // Get slug from URL
     const [project, setProject] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isImageReady, setIsImageReady] = useState(false);
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [error, setError] = useState(null);
 
@@ -69,15 +70,15 @@ const ProjectDetail= () => {
             .resize(scale().width(1200)) // Adjust size as needed
             .delivery(format('auto')).delivery(quality('auto'))
         : null;
-    
+
     // Carousel navigation functions
     const goToNextImage = () => {
-        if (project && project.images && project.images.length > 0){
+        if (project && project.images && project.images.length > 0) {
             setCurrentImageIndex((prevIndex) => (prevIndex + 1) % project.images.length);
         }
     };
     const goToPreviousImage = () => {
-        if (project && project.images && project.images.length > 0){
+        if (project && project.images && project.images.length > 0) {
             setCurrentImageIndex((prevIndex) => (prevIndex - 1 + project.images.length) % project.images.length);
         }
     };
@@ -129,17 +130,17 @@ const ProjectDetail= () => {
             {project.images && project.images.length > 0 && (
                 <section className="mb-8">
                     <h2 className="text-2xl font-semibold mb-4">Project Gallery</h2>
-                    <div className="relative w-full max-w-3xl mx-auto"> {/* Carousel Container */}
+                    <div className="relative w-full max-w-5xl mx-auto"> {/* Carousel Container */}
                         {/* Image Caption area */}
-                        <div key={currentImageIndex} className="carousel-image-caption-container text-center">
-                            <AdvancedImage 
+                        <div key={currentImageIndex} className="carousel-image-caption-container text-center" style={{ aspectRatio: '16:9' }}>
+                            <AdvancedImage
                                 cldImg={cld.image(project.images[currentImageIndex].image_public_id)
-                                    .resize(fill().width(800).height(600).gravity(autoGravity())) // Adjust sizing here as needed.
+                                    .resize(fit().width(1280).height(720)) // Adjust sizing here as needed.
                                     .delivery(format('auto')).delivery(quality('auto'))}
                                 alt={project.images[currentImageIndex].alt_text || project.images[currentImageIndex].caption || `Image ${currentImageIndex + 1} for ${project.title}`}
-                                className="w-full h-auto object-cover rounded-lg shadow-md"
+                                className="w-full h-full object-contain rounded-lg shadow-md"
                             />
-                            {project.images[currentImageIndex].description &&(
+                            {project.images[currentImageIndex].description && (
                                 <p className='p-3 mt-2 text-sm text-gray-700 bg-gray-100 rounded-b-lg shadow'>
                                     {project.images[currentImageIndex].description}
                                 </p>
@@ -151,7 +152,7 @@ const ProjectDetail= () => {
                                 <button
                                     onClick={goToPreviousImage}
                                     className='absolute top-1/2 left-0 sm:-left-12 transform -translate-y-1/2 bg-black bg opacity-50 text-white p-3 rounded-full hover:bg-opacity-75 focus:outline-none z-10 transition-colors duration-150'
-                                    arial-label="Previous Image"
+                                    aria-label="Previous Image"
                                 >
                                     &#10094; {/* Left Arrow */}
                                 </button>

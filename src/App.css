@@ -66,16 +66,18 @@ nav ul:hover {
     --color-smoky-black: #080702;
     --color-columbia-blue: #ABCEE2;
 }
+
 /* In your global CSS file, e.g., src/App.css */
 .carousel-image-caption-container {
-  animation: fadeIn 0.5s ease-in-out;
+    animation: fadeIn 0.8s ease-in-out;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
