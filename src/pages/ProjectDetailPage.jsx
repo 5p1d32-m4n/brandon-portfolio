@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link as RouterLink } from 'react-router-dom'; // Assuming react-router-dom
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage } from '@cloudinary/react';
-import { fill, scale } from "@cloudinary/url-gen/actions/resize";
+import { fill, fit, scale } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import { format, quality } from '@cloudinary/url-gen/actions/delivery';
 
@@ -67,12 +67,16 @@ const ProjectDetailPage = () => {
 
     return (
         <div className="container mx-auto p-4 md:p-8">
-            <header className="mb-8">
+            <header className="mb-8 flex flex-col items-center text-center">
                 <h1 className="text-4xl md:text-5xl font-bold text-columbia-blue mb-2">{project.title}</h1>
                 {project.logo_image_url && (
                     <div className="w-20 h-20 my-4">
                         <AdvancedImage
-                            cldImg={cld.image(project.logo_image_url).resize(fill().width(80).height(80)).delivery(format('auto')).delivery(quality('auto'))}
+                            cldImg={cld
+                                .image(project.logo_image_url)
+                                .resize(fit().width(120).height(120))
+                                .delivery(format('auto'))
+                                .delivery(quality('auto'))}
                             alt={`${project.title} logo`}
                             className="object-contain rounded"
                         />

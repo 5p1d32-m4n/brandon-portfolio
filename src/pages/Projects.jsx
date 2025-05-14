@@ -1,24 +1,49 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Cloudinary } from "@cloudinary/url-gen/index";
+import { auto } from '@cloudinary/url-gen/actions/resize';
+import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
+import { AdvancedImage } from '@cloudinary/react';
 import ProjectCard from "../components/ProjectCard";
 
-const projects = [
-  {
-    title: "ERP System",
-    description: "A .NET web app for managing proposals, projects, timesheets, deliverables and financial allocations.",
-    techStack: "ASP.NET Core MVC, JavaScript, Microsoft SQL Server, Docker",
-    repoLink: "https://github.com/yourgithub/proposal-management",
-    liveDemo: "https://your-live-demo.com"
-  },
-  {
-    title: "WarMiniPricer",
-    description: "A Warhammer 40k figurine price tracker, web scraper and composition builder.",
-    techStack: "Python, Scrapy, Django, React, Microsoft SQL Server",
-    repoLink: "https://github.com/yourgithub/resume-analyzer",
-    liveDemo: "https://your-live-demo.com"
+
+const cld = new Cloudinary({
+  cloud: {
+    cloudName: "dvo1c1tln"
   }
-];
+});
+
+const img = cld
+  .image('cld-sample-5')
+  .format('auto') // Optimize delivery by resizing and applying auto-format and auto-quality
+  .quality('auto')
+  .resize(auto().gravity(autoGravity()).width(500).height(500)); // Transform the image: auto-crop to square aspect_ratio
 
 const Projects = () => {
+
+  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch('/api/projects/projects.js');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        setProjects(data);
+      } catch (error) {
+        console.error("Failed to fetch projects: ", error);
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProjects();
+  }, []);
+
   return (
     <div className="p-6">
       <h2 className="text-3xl font-bold mb-4">My Projects</h2>
