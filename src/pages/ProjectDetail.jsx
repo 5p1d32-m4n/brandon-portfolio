@@ -14,10 +14,11 @@ const cld = new Cloudinary({
     }
 });
 
-const ProjectDetailPage = () => {
+const ProjectDetail= () => {
     const { slug } = useParams(); // Get slug from URL
     const [project, setProject] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -46,6 +47,10 @@ const ProjectDetailPage = () => {
         fetchProject();
     }, [slug]); // Re-fetch if slug changes
 
+    useEffect(() => {
+        setCurrentImageIndex(0); // Reset image index when project changes
+    }, [project])
+
     if (isLoading) {
         return <div className="p-8 text-center">Loading project details...</div>;
     }
@@ -64,6 +69,18 @@ const ProjectDetailPage = () => {
             .resize(scale().width(1200)) // Adjust size as needed
             .delivery(format('auto')).delivery(quality('auto'))
         : null;
+    
+    // Carousel navigation functions
+    const goToNextImage = () => {
+        if (project && project.images && project.images.length > 0){
+            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % project.images.length);
+        }
+    };
+    const goToPreviousImage = () => {
+        if (project && project.images && project.images.length > 0){
+            setCurrentImageIndex((prevIndex) => (prevIndex - 1 + project.images.length) % project.images.length);
+        }
+    };
 
     return (
         <div className="container mx-auto p-4 md:p-8">
@@ -112,17 +129,54 @@ const ProjectDetailPage = () => {
             {project.images && project.images.length > 0 && (
                 <section className="mb-8">
                     <h2 className="text-2xl font-semibold mb-4">Project Gallery</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        {project.images.map((img) => (
-                            <div key={img.image_id} className="rounded-lg overflow-hidden shadow-md">
-                                <AdvancedImage
-                                    cldImg={cld.image(img.image_public_id).resize(fill().width(600).height(400).gravity(autoGravity())).delivery(format('auto')).delivery(quality('auto'))}
-                                    alt={img.alt_text || img.caption || `Image for ${project.title}`}
-                                    className="w-full h-auto object-cover"
-                                />
-                                {img.caption && <p className="p-2 text-sm text-gray-700 bg-gray-50">{img.caption}</p>}
+                    <div className="relative w-full max-w-3xl mx-auto"> {/* Carousel Container */}
+                        {/* Image Caption area */}
+                        <div key={currentImageIndex} className="carousel-image-caption-container text-center">
+                            <AdvancedImage 
+                                cldImg={cld.image(project.images[currentImageIndex].image_public_id)
+                                    .resize(fill().width(800).height(600).gravity(autoGravity())) // Adjust sizing here as needed.
+                                    .delivery(format('auto')).delivery(quality('auto'))}
+                                alt={project.images[currentImageIndex].alt_text || project.images[currentImageIndex].caption || `Image ${currentImageIndex + 1} for ${project.title}`}
+                                className="w-full h-auto object-cover rounded-lg shadow-md"
+                            />
+                            {project.images[currentImageIndex].description &&(
+                                <p className='p-3 mt-2 text-sm text-gray-700 bg-gray-100 rounded-b-lg shadow'>
+                                    {project.images[currentImageIndex].description}
+                                </p>
+                            )}
+                        </div>
+                        {/* Navigation Buttons (only appear if there is more than one image) */}
+                        {project.images.length > 1 && (
+                            <>
+                                <button
+                                    onClick={goToPreviousImage}
+                                    className='absolute top-1/2 left-0 sm:-left-12 transform -translate-y-1/2 bg-black bg opacity-50 text-white p-3 rounded-full hover:bg-opacity-75 focus:outline-none z-10 transition-colors duration-150'
+                                    arial-label="Previous Image"
+                                >
+                                    &#10094; {/* Left Arrow */}
+                                </button>
+                                <button
+                                    onClick={goToNextImage}
+                                    className="absolute top-1/2 right-0 sm:-right-12 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-75 focus:outline-none z-10 transition-colors duration-150"
+                                    aria-label="Next image"
+                                >
+                                    &#10095; {/* Right arrow */}
+                                </button>
+                            </>
+                        )}
+                        {/* Optional: Dots for navigation */}
+                        {project.images.length > 1 && (
+                            <div className="flex justify-center space-x-2 mt-4">
+                                {project.images.map((_, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setCurrentImageIndex(index)}
+                                        className={`w-3 h-3 rounded-full ${currentImageIndex === index ? 'bg-columbia-blue' : 'bg-gray-300 hover:bg-gray-400'} transition-colors duration-150`}
+                                        aria-label={`Go to image ${index + 1}`}
+                                    />
+                                ))}
                             </div>
-                        ))}
+                        )}
                     </div>
                 </section>
             )}
@@ -134,4 +188,4 @@ const ProjectDetailPage = () => {
     );
 };
 
-export default ProjectDetailPage;
+export default ProjectDetail;
