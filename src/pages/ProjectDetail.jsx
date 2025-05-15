@@ -50,7 +50,14 @@ const ProjectDetail = () => {
 
     useEffect(() => {
         setCurrentImageIndex(0); // Reset image index when project changes
+        if (project && project.images && project.images.length > 0) {
+            setIsImageReady(false);
+        }
     }, [project])
+
+    useEffect(() => {
+        setIsImageReady(false);
+    }, [currentImageIndex])
 
     if (isLoading) {
         return <div className="p-8 text-center">Loading project details...</div>;
@@ -130,57 +137,101 @@ const ProjectDetail = () => {
             {project.images && project.images.length > 0 && (
                 <section className="mb-8">
                     <h2 className="text-2xl font-semibold mb-4">Project Gallery</h2>
-                    <div className="relative w-full max-w-5xl mx-auto"> {/* Carousel Container */}
-                        {/* Image Caption area */}
-                        <div key={currentImageIndex} className="carousel-image-caption-container text-center" style={{ aspectRatio: '16:9' }}>
-                            <AdvancedImage
-                                cldImg={cld.image(project.images[currentImageIndex].image_public_id)
-                                    .resize(fit().width(1280).height(720)) // Adjust sizing here as needed.
-                                    .delivery(format('auto')).delivery(quality('auto'))}
-                                alt={project.images[currentImageIndex].alt_text || project.images[currentImageIndex].caption || `Image ${currentImageIndex + 1} for ${project.title}`}
-                                className="w-full h-full object-contain rounded-lg shadow-md"
-                            />
-                            {project.images[currentImageIndex].description && (
-                                <p className='p-3 mt-2 text-sm text-gray-700 bg-gray-100 rounded-b-lg shadow'>
-                                    {project.images[currentImageIndex].description}
-                                </p>
-                            )}
-                        </div>
-                        {/* Navigation Buttons (only appear if there is more than one image) */}
-                        {project.images.length > 1 && (
-                            <>
+                    {/* New wrapper for buttons and gallery for max-width and centering */}
+                    <div className="w-full max-w-5xl mx-auto">
+                        {/* Flex container for buttons and gallery */}
+                        <div className="flex items-center justify-center">
+                            {/* Previous Button - outside gallery, styled */}
+                            {project.images.length > 1 && (
                                 <button
                                     onClick={goToPreviousImage}
-                                    className='absolute top-1/2 left-0 sm:-left-12 transform -translate-y-1/2 bg-black bg opacity-50 text-white p-3 rounded-full hover:bg-opacity-75 focus:outline-none z-10 transition-colors duration-150'
+                                    className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 focus:outline-none transition-colors duration-150 mr-2 sm:mr-4"
                                     aria-label="Previous Image"
                                 >
                                     &#10094; {/* Left Arrow */}
                                 </button>
+                            )}
+
+                            {/* Gallery Content Div - takes up remaining space */}
+                            <div
+                                className="relative flex-1 bg-gray-200 rounded-lg shadow-md overflow-hidden" // flex-1 allows it to grow
+                                style={{ aspectRatio: '16/9' }}
+                            >
+                                {/* Placeholder: Shows when isImageReady is false */}
+                                {!isImageReady && (
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                        {/* Spinner SVG */}
+                                        <svg className="animate-spin h-12 w-12 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                        </svg>
+                                        <p className="mt-3 text-sm text-gray-600">Loading image...</p>
+                                        {/* Placeholder for caption text, appears at bottom of placeholder */}
+                                        <div className="absolute bottom-0 left-0 right-0 p-3 text-center text-sm text-gray-600 bg-gray-300 bg-opacity-75">
+                                            Loading description...
+                                        </div>
+                                    </div>
+                                )}
+                                {/* Actual Image and Caption Container: Fades in when ready */}
+                                <div
+                                    key={currentImageIndex} // This is crucial for re-triggering the load sequence
+                                    className="w-full h-full" // This div will fill the aspect-ratio parent
+                                    style={{
+                                        opacity: isImageReady ? 1 : 0,
+                                        visibility: isImageReady ? 'visible' : 'hidden',
+                                        transition: 'opacity 0.4s ease-in-out',
+                                    }}
+                                >
+                                    <AdvancedImage
+                                        cldImg={cld.image(project.images[currentImageIndex].image_public_id)
+                                            .resize(fit().width(1280).height(720))
+                                            .delivery(format('auto')).delivery(quality('auto'))
+                                        }
+                                        alt={project.images[currentImageIndex].alt_text || project.images[currentImageIndex].caption || `Image ${currentImageIndex + 1} for ${project.title}`}
+                                        className="w-full h-full object-contain"
+                                        onLoad={() => setIsImageReady(true)}
+                                        onError={() => {
+                                            setIsImageReady(true);
+                                            console.error("Image failed to load:", project.images[currentImageIndex].image_public_id);
+                                        }}
+                                    />
+                                    {project.images[currentImageIndex].description && (
+                                        <div className="absolute bottom-0 left-0 right-0 p-3 text-center text-white bg-black bg-opacity-60">
+                                            {project.images[currentImageIndex].description}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Next Button - outside gallery, styled */}
+                            {project.images.length > 1 && (
                                 <button
                                     onClick={goToNextImage}
-                                    className="absolute top-1/2 right-0 sm:-right-12 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full hover:bg-opacity-75 focus:outline-none z-10 transition-colors duration-150"
+                                    className="p-3 rounded-full bg-blue-600 text-white hover:bg-blue-700 focus:outline-none transition-colors duration-150 ml-2 sm:ml-4"
                                     aria-label="Next image"
                                 >
                                     &#10095; {/* Right arrow */}
                                 </button>
-                            </>
-                        )}
-                        {/* Optional: Dots for navigation */}
-                        {project.images.length > 1 && (
-                            <div className="flex justify-center space-x-2 mt-4">
-                                {project.images.map((_, index) => (
-                                    <button
-                                        key={index}
-                                        onClick={() => setCurrentImageIndex(index)}
-                                        className={`w-3 h-3 rounded-full ${currentImageIndex === index ? 'bg-columbia-blue' : 'bg-gray-300 hover:bg-gray-400'} transition-colors duration-150`}
-                                        aria-label={`Go to image ${index + 1}`}
-                                    />
-                                ))}
-                            </div>
-                        )}
+                            )}
+                        </div>
                     </div>
+                    {/* Optional: Dots for navigation (remain outside, below the carousel) */}
+                    {project.images.length > 1 && (
+                        <div className="flex justify-center space-x-2 mt-4">
+                            {project.images.map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setCurrentImageIndex(index)} // Directly set index
+                                    className={`w-3 h-3 rounded-full ${currentImageIndex === index ? 'bg-blue-500' : 'bg-gray-400'
+                                        } hover:bg-blue-400 focus:outline-none transition-colors`}
+                                    aria-label={`Go to image ${index + 1}`}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </section>
             )}
+
 
             <div className="mt-12">
                 <RouterLink to="/projects" className="text-blue-600 hover:underline">&larr; Back to All Projects</RouterLink>
