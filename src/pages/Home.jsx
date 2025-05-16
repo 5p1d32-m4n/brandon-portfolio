@@ -290,7 +290,7 @@ const Home = () => {
                 Functionality focused, design driven, and user centric
               </h2>
             </div>
-            <div className="grid gap-4">
+            <div className="grid gap-8">
               {isLoading && <p>Loading Projects...</p>}
               {error && <p>Error: {error}</p>}
               {!isLoading && !error && projects.map(project => (

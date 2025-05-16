@@ -1,5 +1,6 @@
 import React from "react";
 import { Link as RouterLink } from 'react-router-dom';
+import { BsLink45Deg } from "react-icons/bs";
 import { Cloudinary } from "@cloudinary/url-gen/index";
 import { format, quality } from "@cloudinary/url-gen/actions/delivery";
 import { AdvancedImage } from "@cloudinary/react";
@@ -40,8 +41,9 @@ const ProjectHero = ({
       .delivery(format('auto'))
       .delivery(quality('auto'))
     : null;
+  const caseStudyPath = viewCaseHref || (slug ? `/project/${slug}` : null)
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] border rounded-xl border-columbia-blue w-full text-center lg:text-left">
+    <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] shadow-xl border-2 rounded-2xl border-columbia-blue w-full text-center lg:text-left p-2">
       {/* Left Column */}
       <div className="grid place-content-center gap-4 text-center lg:text-left pl-6">
         <div className="relative mx-auto lg:mx-0 w-24 h-24 flex items-center justify-center overflow-hidden">
@@ -66,16 +68,16 @@ const ProjectHero = ({
           {slug ? ( // Check if slug is provided
             <RouterLink
               to={`/project/${slug}`} // Use the project's slug
-              className="hover:brightness-75 text-lg inline-flex items-center"
+              className="hover:brightness-75 text-lg inline-flex items-center text-amber-400"
               style={{ color: linkColor }}
             >
               View Case
-              <svg /* ... */ > {/* ... */} </svg>
+              <BsLink45Deg className="ml-2 transition-transform duration-150 ease-in-out group-hover:translate-x-1" /> {/* Icon with spacing and hover animation */}
             </RouterLink>
           ) : viewCaseHref ? ( // Fallback to external link if no slug but viewCaseHref exists
-            <a /* ... existing external link setup ... */ href={viewCaseHref}>
+            <a href={viewCaseHref}>
               View Case
-              <svg /* ... */ > {/* ... */} </svg>
+              <BsLink45Deg className="ml-2 transition-transform duration-150 ease-in-out group-hover:translate-x-1" /> {/* Icon with spacing and hover animation */}
             </a>
           ) : null}
         </div>

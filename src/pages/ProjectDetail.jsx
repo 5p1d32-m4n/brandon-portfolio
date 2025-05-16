@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link as RouterLink } from 'react-router-dom'; // Assuming react-router-dom
 import { Cloudinary } from "@cloudinary/url-gen";
 import { AdvancedImage } from '@cloudinary/react';
-import { fill, fit, scale } from "@cloudinary/url-gen/actions/resize";
+import { fill, fit, scale, pad } from "@cloudinary/url-gen/actions/resize";
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import { format, quality } from '@cloudinary/url-gen/actions/delivery';
 
@@ -93,13 +93,13 @@ const ProjectDetail = () => {
     return (
         <div className="container mx-auto p-4 md:p-8">
             <header className="mb-8 flex flex-col items-center text-center">
-                <h1 className="text-4xl md:text-5xl font-bold text-columbia-blue mb-2">{project.title}</h1>
+                <h1 className="text-4xl md:text-5xl font-bold text-xanthous tourney-unique mb-8">{project.title}</h1>
                 {project.logo_image_url && (
-                    <div className="w-20 h-20 my-4">
+                    <div className="w-48 h-48 mx-auto flex items-center justify-center">
                         <AdvancedImage
                             cldImg={cld
                                 .image(project.logo_image_url)
-                                .resize(fit().width(120).height(120))
+                                .resize(pad().width(192).height(192))
                                 .delivery(format('auto'))
                                 .delivery(quality('auto'))}
                             alt={`${project.title} logo`}
@@ -166,10 +166,6 @@ const ProjectDetail = () => {
                                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                         </svg>
                                         <p className="mt-3 text-sm text-gray-600">Loading image...</p>
-                                        {/* Placeholder for caption text, appears at bottom of placeholder */}
-                                        <div className="absolute bottom-0 left-0 right-0 p-3 text-center text-sm text-gray-600 bg-gray-300 bg-opacity-75">
-                                            Loading description...
-                                        </div>
                                     </div>
                                 )}
                                 {/* Actual Image and Caption Container: Fades in when ready */}
@@ -195,11 +191,6 @@ const ProjectDetail = () => {
                                             console.error("Image failed to load:", project.images[currentImageIndex].image_public_id);
                                         }}
                                     />
-                                    {project.images[currentImageIndex].description && (
-                                        <div className="absolute bottom-0 left-0 right-0 p-3 text-center text-white bg-black bg-opacity-60">
-                                            {project.images[currentImageIndex].description}
-                                        </div>
-                                    )}
                                 </div>
                             </div>
 
@@ -214,6 +205,16 @@ const ProjectDetail = () => {
                                 </button>
                             )}
                         </div>
+
+                        {/* Description Area - Below the image and navigation buttons */}
+                        {project.images && project.images.length > 0 && project.images[currentImageIndex].description && (
+                            <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow-md">
+                                <h3 className="text-lg font-semibold text-gray-800 mb-2">View details: </h3>
+                                <p className="text-gray-700 text-sm md:text-base leading-relaxed">
+                                    {project.images[currentImageIndex].description}
+                                </p>
+                            </div>
+                        )}
                     </div>
                     {/* Optional: Dots for navigation (remain outside, below the carousel) */}
                     {project.images.length > 1 && (
