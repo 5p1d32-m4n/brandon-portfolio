@@ -76,7 +76,7 @@ const Home = () => {
     const fetchProjects = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch('/api/projects/projects.js');
+        const response = await fetch('/api/projects/projects');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
