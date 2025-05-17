@@ -18,12 +18,12 @@ const cld = new Cloudinary({
 
 const ProjectHero = ({
   title,
-  description,
+  description, // Changed from caption
   logoSrc,
   heroImage,
   viewCaseHref,
   slug,
-  linkColor,
+  link_color, // Changed from linkColor
   // If you later add an array of additional images for a gallery:
   // additionalImages = [] // e.g., [{ public_id: '...', caption: '...' }, ...]
 }) => {
@@ -69,7 +69,7 @@ const ProjectHero = ({
             <RouterLink
               to={`/project/${slug}`} // Use the project's slug
               className="hover:brightness-75 text-lg inline-flex items-center text-amber-400"
-              style={{ color: linkColor }}
+              style={{ color: link_color || '#F7BF00' }} // Use link_color, fallback to default amber
             >
               View Case
               <BsLink45Deg className="ml-2 transition-transform duration-150 ease-in-out group-hover:translate-x-1" /> {/* Icon with spacing and hover animation */}

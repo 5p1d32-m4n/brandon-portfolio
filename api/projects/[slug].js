@@ -47,13 +47,17 @@ export default async function handler(req, res) {
                     p.id,
                     p.title,
                     p.slug,
-                    p.description,
+                    p.description,       -- Changed from p.caption
+                    p.short_description, -- Added
+                    p.project_type,      -- Added
+                    p.status,            -- Added
+                    p.tech_stack,        -- Added
                     p.hero_image_url,
                     p.logo_image_url,
                     p.repo_link,
                     p.live_demo_url,
                     p.view_case_href,
-                    p.link_color,
+                    p.link_color, 
                     p.created_at,
                     COALESCE(
                         (SELECT JSON_AGG(ROW_TO_JSON(pi_sub.*) ORDER BY pi_sub.display_order ASC)
@@ -61,7 +65,7 @@ export default async function handler(req, res) {
                             SELECT
                                 pi.id as image_id,
                                 pi.image_public_id,
-                                pi.description,
+                                pi.caption,
                                 pi.alt_text,
                                 pi.display_order
                             FROM project_images pi

@@ -6,22 +6,16 @@ import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import { AdvancedImage } from '@cloudinary/react';
 import ProjectHero from "../components/ProjectHero.jsx";
 import ProjectCard from "../components/ProjectCard";
-import selfie from "../assets/Brandon.jpg"
-import selfie2 from "../assets/BrandonCircled.jpg"
+import selfie2 from "../assets/BrandonCircled.jpg";
 import { ImEmbed2 } from "react-icons/im";
 import { IoBriefcaseOutline, IoShield, IoLogoJavascript, IoLogoReact, IoLogoHtml5, IoLogoNodejs, IoLogoCss3 } from "react-icons/io5";
-import { FaDocker, FaFigma, FaWordpress, FaGithub, FaGoogle } from "react-icons/fa";
+import { FaDocker, FaFigma, FaWordpress, FaGithub, FaPython } from "react-icons/fa";
 import { BsWindowStack } from "react-icons/bs";
 import { MdOutlineScreenSearchDesktop } from "react-icons/md";
-import { SiExpress, SiMongodb, SiTailwindcss, SiAdobephotoshop, SiAdobeillustrator, SiCanva, SiElementor, SiWix, SiSemrush, SiZapier, SiDocker, SiPostman } from "react-icons/si";
+import { SiExpress, SiMongodb, SiTailwindcss, SiAdobephotoshop, SiCanva, SiZapier, SiDocker, SiPostman, SiDotnet } from "react-icons/si";
 import { RiNextjsLine } from "react-icons/ri";
 import { DiMsqlServer } from "react-icons/di";
-import { VscAzure, VscAzureDevops } from "react-icons/vsc";
-import erpHome from "../assets/portfolioImages/erp/erpHome.png"
-import erpLogo from "../assets/portfolioImages/erp/stgLogo.png"
-import warMiniHome from "../assets/portfolioImages/warmini/minis-list.png";
-import warMiniLogo from "../assets/portfolioImages/warmini/WSLogo.jpeg";
-
+import { VscAzure } from "react-icons/vsc";
 
 // Add this near the top of your file with other imports
 const developmentSkills = [
@@ -35,6 +29,8 @@ const developmentSkills = [
   { name: 'Express', icon: SiExpress, color: '#000000' },
   { name: 'Mongodb', icon: SiMongodb, color: '#4DB33D' },
   { name: 'Microsoft SQL', icon: DiMsqlServer, color: '#CC2927' },
+  { name: 'ASP .NET', icon: SiDotnet, color: '#3776AB' },
+  { name: 'Python', icon: FaPython, color: '#512BD4' },
   // Add more skills...
 ];
 
@@ -217,10 +213,7 @@ const Home = () => {
                     <h2 className="text-2xl font-bold text-columbia-blue">Development Skills</h2>
                     <hr className="border-columbia-blue" />
                     <p className="pt-4 pb-8 lg:py-8">
-                      As a MERN stack developer specializing in frontend development with a strong understanding
-                      of backend architecture, I build dynamic, scalable web applications. My focus is on creating
-                      seamless user experiences with high performance and efficiency, leveraging modern technologies
-                      to deliver robust, full-stack solutions.
+                      A versatile full-stack developer, I specialize in the MERN stack for frontend development while possessing a comprehensive understanding of backend architecture to build dynamic, scalable web applications. My technical proficiency also includes backend development using Python for Django REST API creation, web scraping, and automation projects, complemented by experience in C# for ASP.NET Core development. I am committed to creating seamless user experiences with high performance and efficiency, employing a diverse set of modern technologies to deliver robust solutions.
                     </p>
                   </div>
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
@@ -297,17 +290,18 @@ const Home = () => {
                 <ProjectHero
                   key={project.id} // Might make this into the 'slug' field.
                   title={project.title}
-                  description={project.description}
-                  heroImage={project.hero_image_url} // Making this into Cloudinary url
-                  logoSrc={project.logo_image_url} // Making this into Cloudinary url
-                  repoLink={project.repo_link}
+                  description={project.description} // Changed from caption
+                  heroImage={project.hero_image_url}
+                  logoSrc={project.logo_image_url}
+                  // repoLink={project.repo_link} // repoLink is not a prop of ProjectHero
                   viewCaseHref={project.view_case_href}
                   slug={project.slug}
+                  link_color={project.link_color} // Pass link_color
                 />
               ))}
               {/* <ProjectHero
                 title="WarMiniPricer"
-                description="Engineered a web application featuring automated web scraping to gather and track pricing data for miniature figurines across multiple e-commerce sites. This tool, built for local retailer Wargamer's Alley, provides insights into market trends and includes modules for pre-order and delivery management, enhancing their inventory control and pricing decisions."
+                caption="Engineered a web application featuring automated web scraping to gather and track pricing data for miniature figurines across multiple e-commerce sites. This tool, built for local retailer Wargamer's Alley, provides insights into market trends and includes modules for pre-order and delivery management, enhancing their inventory control and pricing decisions."
                 heroImage={warMiniHome}
                 // If you have a separate logo image, pass it here:
                 logoSrc={warMiniLogo} // Replace 'warMiniLogo' with the appropriate asset.
@@ -317,7 +311,7 @@ const Home = () => {
               />
               <ProjectHero
                 title="STG-ERP"
-                description="An ERP system, which stands for 'Enterprise Resource Planning', is a software system that integrates and automates a company's core business processes, including finance, human resources, manufacturing, supply chain, sales, and procurement, providing a unified view of all operations and a single source of truth for data across different departments within ShareTechGroup Engineering."
+                caption="An ERP system, which stands for 'Enterprise Resource Planning', is a software system that integrates and automates a company's core business processes, including finance, human resources, manufacturing, supply chain, sales, and procurement, providing a unified view of all operations and a single source of truth for data across different departments within ShareTechGroup Engineering."
                 heroImage={erpHome}
                 // If you have a separate logo image, pass it here:
                 logoSrc={erpLogo} // Replace 'erpLogo' with the appropriate asset.
@@ -328,7 +322,7 @@ const Home = () => {
             <div className="grid place-items-center">
               <Link
                 to="/projects"
-                className="font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap rounded text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary hover:brightness-75 h-10 px-4 py-2 mt-8"
+                className="font-semibold inline-flex items-center justify-center gap-2 whitespace-nowrap rounded text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 text-primary hover:brightness-75 h-10 px-4 py-2 mt-8"
                 aria-label="View all Projects"
               >
                 View all Projects

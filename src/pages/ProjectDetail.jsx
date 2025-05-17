@@ -109,7 +109,7 @@ const ProjectDetail = () => {
                 )}
                 <div className="flex space-x-4 mt-4">
                     {project.repo_link && (
-                        <a href={project.repo_link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">GitHub Repo</a>
+                        <a href={project.repo_link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">GitHub</a>
                     )}
                     {project.live_demo_url && (
                         <a href={project.live_demo_url} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:underline">Live Demo</a>
@@ -206,12 +206,12 @@ const ProjectDetail = () => {
                             )}
                         </div>
 
-                        {/* Description Area - Below the image and navigation buttons */}
-                        {project.images && project.images.length > 0 && project.images[currentImageIndex].description && (
+                        {/* caption Area - Below the image and navigation buttons */}
+                        {project.images && project.images.length > 0 && project.images[currentImageIndex].caption && (
                             <div className="mt-4 p-4 bg-gray-100 rounded-lg shadow-md">
                                 <h3 className="text-lg font-semibold text-gray-800 mb-2">View details: </h3>
                                 <p className="text-gray-700 text-sm md:text-base leading-relaxed">
-                                    {project.images[currentImageIndex].description}
+                                    {project.images[currentImageIndex].caption}
                                 </p>
                             </div>
                         )}
