@@ -26,7 +26,7 @@ const ContactForm = () => {
 
         try {
             // Replace '/api/contact' with your actual backend endpoint
-            const response = await fetch('/api/email/send-emails.js', {
+            const response = await fetch('/api/email/send-emails', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
