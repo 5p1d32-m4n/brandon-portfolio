@@ -1,70 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router";
-import { Cloudinary } from "@cloudinary/url-gen/index";
-import { auto } from '@cloudinary/url-gen/actions/resize';
-import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
-import { AdvancedImage } from '@cloudinary/react';
+import { Link } from "react-router-dom";
 import ProjectHero from "../components/ProjectHero.jsx";
-import ProjectCard from "../components/ProjectCard";
 import selfie2 from "../assets/BrandonCircled.jpg";
 import { ImEmbed2 } from "react-icons/im";
-import { IoBriefcaseOutline, IoShield, IoLogoJavascript, IoLogoReact, IoLogoHtml5, IoLogoNodejs, IoLogoCss3 } from "react-icons/io5";
-import { FaDocker, FaFigma, FaWordpress, FaGithub, FaPython } from "react-icons/fa";
+import { IoBriefcaseOutline, IoShield } from "react-icons/io5";
+import { FaDocker } from "react-icons/fa";
 import { BsWindowStack } from "react-icons/bs";
 import { MdOutlineScreenSearchDesktop } from "react-icons/md";
-import { SiExpress, SiMongodb, SiTailwindcss, SiAdobephotoshop, SiCanva, SiZapier, SiDocker, SiPostman, SiDotnet } from "react-icons/si";
-import { RiNextjsLine } from "react-icons/ri";
-import { DiMsqlServer } from "react-icons/di";
-import { VscAzure } from "react-icons/vsc";
-
-// Add this near the top of your file with other imports
-const developmentSkills = [
-  { name: 'Javascript', icon: IoLogoJavascript, color: '#F7DF1E' },
-  { name: 'React', icon: IoLogoReact, color: '#61DAFB' },
-  { name: 'HTML', icon: IoLogoHtml5, color: '#E34F26' },
-  { name: 'NodeJS', icon: IoLogoNodejs, color: '#68A063' },
-  { name: 'Tailwind', icon: SiTailwindcss, color: '#38B2AC' },
-  { name: 'CSS', icon: IoLogoCss3, color: '#264DE4' },
-  { name: 'Next.js', icon: RiNextjsLine, color: '#000000' },
-  { name: 'Express', icon: SiExpress, color: '#000000' },
-  { name: 'Mongodb', icon: SiMongodb, color: '#4DB33D' },
-  { name: 'Microsoft SQL', icon: DiMsqlServer, color: '#CC2927' },
-  { name: 'ASP .NET', icon: SiDotnet, color: '#3776AB' },
-  { name: 'Python', icon: FaPython, color: '#512BD4' },
-  // Add more skills...
-];
-
-// Update the design skills array
-const designSkills = [
-  { name: 'Figma', icon: FaFigma, color: '#0ACF83' },
-  { name: 'Photoshop', icon: SiAdobephotoshop, color: '#31A8FF' },
-  { name: 'Canva', icon: SiCanva, color: '#00C4CC' },
-  { name: 'Wordpress', icon: FaWordpress, color: '#21759B' },
-];
-
-// Update the other skills array
-const otherSkills = [
-  { name: 'Github', icon: FaGithub, color: '#181717' },
-  { name: 'Zapier', icon: SiZapier, color: '#FF4A00' },
-  { name: 'Docker', icon: SiDocker, color: '#31A8FF' },
-  { name: 'Postman', icon: SiPostman, color: '#FF4A00' },
-  { name: 'Azure', icon: VscAzure, color: '#31A8FF' },
-];
-
-// Cloudinary configuration
-const cld = new Cloudinary({
-  cloud: {
-    cloudName: "dvo1c1tln"
-  }
-});
-
-// Use this sample image or upload your own via the Media Explorer
-const img = cld
-  .image('cld-sample-5')
-  .format('auto') // Optimize delivery by resizing and applying auto-format and auto-quality
-  .quality('auto')
-  .resize(auto().gravity(autoGravity()).width(500).height(500)); // Transform the image: auto-crop to square aspect_ratio
-
+import ContactForm from "../components/ContactForm.jsx";
+import { developmentSkills, designSkills, otherSkills } from "../data/skills.js";
 
 
 const Home = () => {
@@ -330,7 +274,18 @@ const Home = () => {
             </div>
           </section>
           {/* Contact Form */}
-          <section id="contact"></section>
+          <section id="contact" className="py-24 w-1/2 mx-auto">
+            <div className="px-4">
+              <hgroup className="text-center mb-12">
+                <h2 className="pb-4 text-columbia-blue text-2xl font-semibold">Get In Touch </h2>
+                <h1 className="text-primary uppercase text-4xl">Contact Me</h1>
+                <p className="mt-4 text-lg text-gray-600">
+                  Have a project in mind or just want to say hi? Fill out the form below and I'll get back to you as soon as possible.
+                </p>
+              </hgroup>
+              <ContactForm />
+            </div>
+          </section>
           {/* Tesgin */}
           {/* <section id="testing">
           </section> */}
